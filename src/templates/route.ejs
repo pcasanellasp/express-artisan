@@ -1,0 +1,13 @@
+// ------------------------------
+// <%- locals.name %> Routes
+// ------------------------------
+
+const express = require('express')
+const router = express.Router()
+module.exports = router
+
+// Generated Routes
+
+router.get('/', function(req, res, next) {
+    res.send('<%- locals.name %>')
+})

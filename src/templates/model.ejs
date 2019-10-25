@@ -1,0 +1,22 @@
+// ------------------------------
+// <%- locals.name %> Model
+// ------------------------------
+
+'use strict'
+
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+
+const <%- locals.name %>Schema = new Schema({
+    id: {
+        type: Number,
+        unique: true,
+    },
+},
+{
+  timestamps: true,
+  toJSON: { virtuals: true },
+})
+
+const <%- locals.name %> = mongoose.model('<%- locals.name %>', <%- locals.name %>Schema)
+module.exports = <%- locals.name %>
