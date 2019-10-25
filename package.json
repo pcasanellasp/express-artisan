@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "express-artisan": "bin/artisan"
+    "artisan": "bin/artisan"
   },
   "keywords": [
     "cli",
