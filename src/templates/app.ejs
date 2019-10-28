@@ -1,0 +1,80 @@
+// ------------------------------
+// server.js
+// ------------------------------
+
+'use strict'
+
+global.config = require('./app/config')
+
+const { ApiError } = require('./app/lib/utils')
+
+global.ApiError = ApiError
+
+// Store the app root path as a global var for all the modules to see.
+global.appRootPath = require('path').resolve(__dirname)
+
+const express = require('express')
+const morgan = require('morgan')
+
+// Initialize all models
+require('./app/models/allModels.js').initialize()
+
+const app = express()
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan(':status | :response-time ms | :method :url | :remote-addr'))
+}
+
+// Routes
+const customersRouter = require('./app/routes/customersRouter')
+
+// Allow CORS.
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept-Language')
+  next()
+})
+
+app.options('/*', (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,PATCH,DELETE,OPTIONS')
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept-Language')
+  res.sendStatus(200)
+})
+
+// Use express json parse to get json objects in request body.
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+
+// Customers routes.
+app.use('/customers', customersRouter)
+
+// Capture 404 errors
+app.use(function (req, res, next) {
+  const error = {
+    errors: ['Nothing to do here...'],
+    statusCode: '404',
+  }
+
+  next(error)
+})
+
+// Capture errors
+app.use(function (error, req, res, next) {
+  const { statusCode, errors } = error
+
+  if (process.env.NODE_ENV !== 'production') {
+    console.info('---> console error')
+    console.error(errors || error)
+    console.info('---> end error')
+  }
+
+  res.status(statusCode || 500).json({
+    status: 'error',
+    errors: errors || error,
+  })
+})
+
+// Security.
+app.disable('x-powered-by')
+module.exports = app

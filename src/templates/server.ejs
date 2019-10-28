@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+const app = require('./app')
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+const port = process.env.PORT || '8080'
+app.set('port', port)
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+app.listen(port, () => console.info('\x1b[34m%s\x1b[0m', `
+  REST      → http://localhost:${port}/
+  `
+))

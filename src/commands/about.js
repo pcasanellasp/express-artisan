@@ -2,8 +2,7 @@ const author = `
 Author: 
 - Pau Casanellas Pérez
 
-Contributors: 
-- User 1`
+Contributors: `
 
 module.exports = function () {
   console.info(author)

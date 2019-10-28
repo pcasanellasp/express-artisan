@@ -13,8 +13,8 @@ module.exports = async (args) => {
         require('./commands/version')(options)
         break
 
-      case 'author':
-        require('./commands/author')()
+      case 'about':
+        require('./commands/about')()
         break
 
       case 'help':

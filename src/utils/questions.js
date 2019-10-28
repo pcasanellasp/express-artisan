@@ -8,7 +8,7 @@ module.exports = (options, q) => {
     questions.push({
       type: 'input',
       name: 'name',
-      message: 'Resource name: ',
+      message: 'Name: ',
     })
   }
 
