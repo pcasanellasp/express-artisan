@@ -87,6 +87,23 @@ module.exports = (options, q) => {
     })
   }
 
+  if (!options.endpoint && q.includes('endpoint')) {
+    questions.push({
+      type: 'input',
+      name: 'endpoint',
+      message: 'Base path: (empty)',
+    })
+  }
+
+  if (!options.port && q.includes('port')) {
+    questions.push({
+      type: 'number',
+      name: 'port',
+      message: 'Port: ',
+      default: '8080',
+    })
+  }
+
   if (!options.view && q.includes('view')) {
     questions.push({
       type: 'list',

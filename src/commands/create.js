@@ -14,6 +14,7 @@ module.exports = async (options) => {
     'testing',
     'events',
     'port',
+    'endpoint',
   ])
 
   console.info(options)

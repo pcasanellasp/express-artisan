@@ -6,18 +6,18 @@ module.exports = {
   compileFile,
 }
 
-function compileFile (template, args, folder) {
+function compileFile (template, args, folder, ext = 'js') {
   const templateRender = getTemplate(template, args).render()
-  createFile(folder, args.name)
-  writeFile(`${folder}/${args.name}.js`, templateRender)
+  const fileName = `${args.name}.${ext}`
+  createFile(folder, fileName)
+  writeFile(`${folder}/${fileName}`, templateRender)
 }
 
-function createFile (folder, name, ext = 'js') {
-  const folderName = `./${folder}`
-  const filePath = `${folderName}/${name}.${ext}`
+function createFile (folder, name) {
+  const filePath = `./${folder}/${name}`
 
-  if (!fs.existsSync(folderName)) {
-    fs.mkdirSync(folderName, { recursive: true })
+  if (!fs.existsSync(folder)) {
+    fs.mkdirSync(folder, { recursive: true })
   }
 
   if (!fs.existsSync(filePath)) {
