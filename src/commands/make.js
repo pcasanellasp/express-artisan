@@ -37,7 +37,7 @@ module.exports = async (options) => {
     fs.compileFile(template, args, folder)
 
     if (args.controller) {
-      fs.compileFile('controller', args, 'controllers')
+      fs.compileFile('controller', args, 'controllers', 'js', 'Controller')
     }
 
     if (args.model) {
@@ -45,7 +45,7 @@ module.exports = async (options) => {
     }
 
     if (args.route) {
-      fs.compileFile('route', args, 'routes')
+      fs.compileFile('route', args, 'routes', 'js', 'Router')
     }
   } catch (error) {
     console.info(error.message)

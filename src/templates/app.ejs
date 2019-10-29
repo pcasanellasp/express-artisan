@@ -1,23 +1,16 @@
 // ------------------------------
-// server.js
+// app.js
 // ------------------------------
 
 'use strict'
-
-global.config = require('./app/config')
-
-const { ApiError } = require('./app/lib/utils')
-
-global.ApiError = ApiError
-
-// Store the app root path as a global var for all the modules to see.
-global.appRootPath = require('path').resolve(__dirname)
-
 const express = require('express')
 const morgan = require('morgan')
+const db = require('./app/config/database.js')
+const { ApiError } = require('./app/lib/utils')
+global.ApiError = ApiError
 
-// Initialize all models
-require('./app/models/allModels.js').initialize()
+// Database Connect
+db.initialize()
 
 const app = express()
 
@@ -26,7 +19,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Routes
-const customersRouter = require('./app/routes/customersRouter')
+const welcomeRouter = require('./app/routes/welcomeRouter')
 
 // Allow CORS.
 app.use(function (req, res, next) {
@@ -47,7 +40,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 // Customers routes.
-app.use('/customers', customersRouter)
+app.use('/', welcomeRouter)
 
 // Capture 404 errors
 app.use(function (req, res, next) {

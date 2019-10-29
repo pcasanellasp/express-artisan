@@ -8,7 +8,7 @@ const menus = {
       help ............... show help menu for a command`,
 
   create: `
-      express-artisan create <args>
+      xartisan create <args>
       --location, -l ..... the location to use`,
 }
 

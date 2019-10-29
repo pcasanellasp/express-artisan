@@ -6,9 +6,9 @@ module.exports = {
   compileFile,
 }
 
-function compileFile (template, args, folder, ext = 'js') {
+function compileFile (template, args, folder, ext = 'js', prefix = '') {
   const templateRender = getTemplate(template, args).render()
-  const fileName = `${args.name}.${ext}`
+  const fileName = `${args.name}${prefix}.${ext}`
   createFile(folder, fileName)
   writeFile(`${folder}/${fileName}`, templateRender)
 }

@@ -1,5 +1,4 @@
 const arg = require('arg')
-const inquirer = require('inquirer')
 const questions = require('./questions')
 
 function getArgs (options) {
@@ -60,7 +59,7 @@ function getArgs (options) {
 }
 
 async function setArgs (options, questionsArray) {
-  const answers = await inquirer.prompt(questions(options, questionsArray))
+  const answers = await questions(options, questionsArray)
 
   return {
     ...options,

@@ -1,4 +1,6 @@
-module.exports = (options, q) => {
+const { prompt } = require('enquirer')
+
+module.exports = async (options, q) => {
   // Defaults
 
   const questions = []
@@ -14,7 +16,7 @@ module.exports = (options, q) => {
 
   if (!options.subcommand && q.includes('subcommand')) {
     questions.push({
-      type: 'list',
+      type: 'select',
       name: 'subcommand',
       message: 'What type of resource:  ',
       choices: ['model', 'route', 'controller', 'test', 'mail'],
@@ -69,7 +71,7 @@ module.exports = (options, q) => {
 
   if (!options.db && q.includes('db')) {
     questions.push({
-      type: 'list',
+      type: 'select',
       name: 'db',
       message: 'Database Engine: ',
       choices: ['None', 'mongoose', 'sequelize'],
@@ -79,7 +81,7 @@ module.exports = (options, q) => {
 
   if (!options.api && q.includes('api')) {
     questions.push({
-      type: 'list',
+      type: 'select',
       name: 'api',
       message: 'API Engine: ',
       choices: ['None', 'API REST', 'Graphql'],
@@ -97,7 +99,7 @@ module.exports = (options, q) => {
 
   if (!options.port && q.includes('port')) {
     questions.push({
-      type: 'number',
+      type: 'numeral',
       name: 'port',
       message: 'Port: ',
       default: '8080',
@@ -106,17 +108,22 @@ module.exports = (options, q) => {
 
   if (!options.view && q.includes('view')) {
     questions.push({
-      type: 'list',
+      type: 'select',
       name: 'view',
       message: 'View Engine: ',
-      choices: ['None', 'ejs', 'hbs', 'plain'],
+      choices: [
+        { name: 'None', value: 'none' },
+        { name: 'ejs', value: 'ejs' },
+        { name: 'hbs', value: 'ejs' },
+        { name: 'plain', value: 'plain' },
+      ],
       default: 'None',
     })
   }
 
   if (!options.linter && q.includes('linter')) {
     questions.push({
-      type: 'list',
+      type: 'select',
       name: 'linter',
       message: 'Linter: ',
       choices: ['None', 'eslint'],
@@ -126,7 +133,7 @@ module.exports = (options, q) => {
 
   if (!options.testing && q.includes('testing')) {
     questions.push({
-      type: 'list',
+      type: 'select',
       name: 'testing',
       message: 'Testing Engine: ',
       choices: ['None', 'Mocha + Chai', 'jest'],
@@ -161,5 +168,5 @@ module.exports = (options, q) => {
     })
   }
 
-  return questions
+  return prompt(questions)
 }
