@@ -10,13 +10,16 @@ module.exports = async (options) => {
 
     let args
     let folder = 'src'
-
+    const ext = 'js'
+    const prefix = ''
+    let capitalize = false
     const template = options.subcommand
 
     switch (options.subcommand) {
       case 'model':
         args = await setArgs(options, ['name', 'controller', 'route'])
         folder = 'models'
+        capitalize = true
         break
 
       case 'route':
@@ -34,18 +37,18 @@ module.exports = async (options) => {
     }
 
     // Run Make Program
-    fs.compileFile(template, args, folder)
+    fs.createFile(folder, template, args, ext, prefix, capitalize)
 
     if (args.controller) {
-      fs.compileFile('controller', args, 'controllers', 'js', 'Controller')
+      fs.createFile('controllers', 'controller', args, 'js', 'Controller', false)
     }
 
     if (args.model) {
-      fs.compileFile('model', args, 'models')
+      fs.createFile('models', 'model', args, 'js', '', true)
     }
 
     if (args.route) {
-      fs.compileFile('route', args, 'routes', 'js', 'Router')
+      fs.createFile('routes', 'route', args, 'js', 'Router', false)
     }
   } catch (error) {
     console.info(error.message)
