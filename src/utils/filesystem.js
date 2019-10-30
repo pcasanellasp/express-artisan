@@ -22,13 +22,7 @@ function getTemplate (folder, template, options) {
   }
 }
 
-function createFile (folder, template, args, ext = 'js', prefix = '', capital = false) {
-  // Capitalize Name File
-  console.info(args)
-  if (capital === true) {
-    args.name = capitalize(args.name)
-  }
-
+function createFile (folder, template, args, ext = 'js', prefix = '') {
   // Create folder if not exist
   if (!fs.existsSync(folder)) {
     fs.mkdirSync(folder, { recursive: true })
@@ -38,13 +32,8 @@ function createFile (folder, template, args, ext = 'js', prefix = '', capital = 
   const content = getTemplate(folder, template, args).render()
   if (!fs.existsSync(file)) {
     fs.writeFileSync(file, content)
-    args.name = args.name.toLowerCase()
     console.info('   \x1b[36mcreate\x1b[0m : ' + file)
   } else {
     throw new Error('File Already Exists')
   }
-}
-
-function capitalize (string) {
-  return string.charAt(0).toUpperCase() + string.slice(1)
 }

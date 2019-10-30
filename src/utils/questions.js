@@ -19,7 +19,7 @@ module.exports = async (options, q) => {
       type: 'select',
       name: 'subcommand',
       message: 'What type of resource:  ',
-      choices: ['model', 'route', 'controller', 'test', 'mail'],
+      choices: ['model', 'route', 'controller', 'crud', 'test', 'mail'],
       default: 'model',
     })
   }

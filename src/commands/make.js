@@ -32,23 +32,32 @@ module.exports = async (options) => {
         folder = 'controllers'
         break
 
+      case 'crud':
+        args = await setArgs(options, ['name'])
+        break
       default:
         throw new Error('Please specifify valid make resource. Valid values: model, route, controller, test')
     }
 
-    // Run Make Program
-    fs.createFile(folder, template, args, ext, prefix, capitalize)
+    if (options.subcommand === 'crud') {
+      fs.createFile('controllers', 'crudController', args, 'js', 'Controller', false)
+      fs.createFile('models', 'model', args, 'js', '', false)
+      fs.createFile('routes', 'crudRoute', args, 'js', 'Router', false)
+    } else {
+      // Run Make Program
+      fs.createFile(folder, template, args, ext, prefix, capitalize)
 
-    if (args.controller) {
-      fs.createFile('controllers', 'controller', args, 'js', 'Controller', false)
-    }
+      if (args.controller) {
+        fs.createFile('controllers', 'controller', args, 'js', 'Controller')
+      }
 
-    if (args.model) {
-      fs.createFile('models', 'model', args, 'js', '', true)
-    }
+      if (args.model) {
+        fs.createFile('models', 'model', args, 'js', '')
+      }
 
-    if (args.route) {
-      fs.createFile('routes', 'route', args, 'js', 'Router', false)
+      if (args.route) {
+        fs.createFile('routes', 'route', args, 'js', 'Router')
+      }
     }
   } catch (error) {
     console.info(error.message)

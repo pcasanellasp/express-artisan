@@ -59,11 +59,15 @@ function getArgs (options) {
 }
 
 async function setArgs (options, questionsArray) {
-  const answers = await questions(options, questionsArray)
+  try {
+    const answers = await questions(options, questionsArray)
 
-  return {
-    ...options,
-    ...answers,
+    return {
+      ...options,
+      ...answers,
+    }
+  } catch (error) {
+    throw new Error(error)
   }
 }
 

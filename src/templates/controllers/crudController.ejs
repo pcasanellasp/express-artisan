@@ -1,0 +1,71 @@
+// ------------------------------
+// <%- locals.name %> Controller
+// ------------------------------
+
+const <%- locals.name %> = require('../models/<%- locals.name %>')
+
+async function get (req, res, next) {
+  try {
+    // Custom static method defined on <%- locals.name %> model
+    const results = await <%- locals.name %>.search(req.query)
+    return res.status(200).json({ results })
+  } catch (error) {
+    next(error)
+  }
+}
+
+async function show (req, res, next) {
+  try {
+    const result = await <%- locals.name %>.findOne({ _id: req.params.id }).lean()
+    if (result) {
+      return res.status(200).json(result)
+    }
+    return res.status(400).json({ message: 'Not Found' })
+  } catch (error) {
+    next(error)
+  }
+}
+
+async function create (req, res, next) {
+  try {
+    const result = await new <%- locals.name %>(req.body)
+    await result.save()
+    return res.status(200).json(result)
+  } catch (error) {
+    next(error)
+  }
+}
+
+async function update (req, res, next) {
+  try {
+    const result = await <%- locals.name %>.findOneAndUpdate(
+      { _id: req.params.id },
+      { $set: req.body },
+      {
+        new: true,
+        runValidators: true,
+      }
+    )
+    return res.status(200).json(result)
+  } catch (error) {
+    error.statusCode = 403
+    next(error)
+  }
+}
+
+async function remove (req, res, next) {
+  try {
+    await <%- locals.name %>.findOneAndDelete({ _id: req.params.id })
+    return res.status(200).json({ message: 'Deleted' })
+  } catch (error) {
+    next(error)
+  }
+}
+
+module.exports = {
+  get,
+  show,
+  create,
+  update,
+  remove,
+}

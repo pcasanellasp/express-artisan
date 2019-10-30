@@ -2,15 +2,12 @@
 // <%- locals.name %> Model
 // ------------------------------
 
-'use strict'
-
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const <%- locals.name %>Schema = new Schema({
-    id: {
-        type: Number,
-        unique: true,
+    name: {
+        type: String,
     },
 },
 {

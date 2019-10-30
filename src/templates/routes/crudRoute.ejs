@@ -1,0 +1,17 @@
+// ------------------------------
+// <%- locals.name %> Routes
+// ------------------------------
+
+const express = require('express')
+const router = express.Router()
+const <%- locals.name %>Controller = require('../controllers/<%- locals.name %>Controller')
+
+// --------------------
+router.get('/', <%- locals.name %>Controller.get)
+router.get('/:id', <%- locals.name %>Controller.show)
+router.post('/', <%- locals.name %>Controller.create)
+router.patch('/:id', <%- locals.name %>Controller.update)
+router.delete('/:id', <%- locals.name %>Controller.remove)
+
+
+module.exports = router
