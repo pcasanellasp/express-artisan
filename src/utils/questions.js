@@ -79,7 +79,7 @@ module.exports = async (options, q) => {
     })
   }
 
-  if (!options.api && q.includes('api')) {
+  /* if (!options.api && q.includes('api')) {
     questions.push({
       type: 'select',
       name: 'api',
@@ -87,26 +87,26 @@ module.exports = async (options, q) => {
       choices: ['None', 'API REST', 'Graphql'],
       default: 'None',
     })
-  }
+  } */
 
-  if (!options.endpoint && q.includes('endpoint')) {
+  /* if (!options.endpoint && q.includes('endpoint')) {
     questions.push({
       type: 'input',
       name: 'endpoint',
       message: 'Base path: (empty)',
     })
-  }
+  } */
 
-  if (!options.port && q.includes('port')) {
+  /* if (!options.port && q.includes('port')) {
     questions.push({
       type: 'numeral',
       name: 'port',
       message: 'Port: ',
       default: '8080',
     })
-  }
+  } */
 
-  if (!options.view && q.includes('view')) {
+  /* if (!options.view && q.includes('view')) {
     questions.push({
       type: 'select',
       name: 'view',
@@ -119,9 +119,9 @@ module.exports = async (options, q) => {
       ],
       default: 'None',
     })
-  }
+  } */
 
-  if (!options.linter && q.includes('linter')) {
+  /* if (!options.linter && q.includes('linter')) {
     questions.push({
       type: 'select',
       name: 'linter',
@@ -129,9 +129,9 @@ module.exports = async (options, q) => {
       choices: ['None', 'eslint'],
       default: 'None',
     })
-  }
+  } */
 
-  if (!options.testing && q.includes('testing')) {
+  /* if (!options.testing && q.includes('testing')) {
     questions.push({
       type: 'select',
       name: 'testing',
@@ -139,34 +139,34 @@ module.exports = async (options, q) => {
       choices: ['None', 'Mocha + Chai', 'jest'],
       default: 'None',
     })
-  }
+  } */
 
-  if (!options.auth && q.includes('auth')) {
+  /* if (!options.auth && q.includes('auth')) {
     questions.push({
       type: 'confirm',
       name: 'auth',
       message: 'Create auth component? ',
       default: false,
     })
-  }
+  } */
 
-  if (!options.git && q.includes('git')) {
+  /* if (!options.git && q.includes('git')) {
     questions.push({
       type: 'confirm',
       name: 'git',
       message: 'Initialize a git repository? ',
       default: false,
     })
-  }
+  } */
 
-  if (!options.install && q.includes('install')) {
+  /* if (!options.install && q.includes('install')) {
     questions.push({
       type: 'confirm',
       name: 'install',
       message: 'Run npm install? ',
       default: false,
     })
-  }
+  } */
 
   return prompt(questions)
 }

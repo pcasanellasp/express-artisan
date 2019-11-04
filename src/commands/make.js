@@ -10,7 +10,7 @@ module.exports = async (options) => {
 
     let args
     let folder = 'src'
-    const ext = 'js'
+    const ext = '.js'
     const prefix = ''
     let capitalize = false
     const template = options.subcommand
@@ -40,23 +40,23 @@ module.exports = async (options) => {
     }
 
     if (options.subcommand === 'crud') {
-      fs.createFile('controllers', 'crudController', args, 'js', 'Controller', false)
-      fs.createFile('models', 'model', args, 'js', '', false)
-      fs.createFile('routes', 'crudRoute', args, 'js', 'Router', false)
+      fs.createFile('controllers', 'crudController', args, '.js', 'Controller', false)
+      fs.createFile('models', 'model', args, '.js', '', false)
+      fs.createFile('routes', 'crudRoute', args, '.js', 'Router', false)
     } else {
       // Run Make Program
       fs.createFile(folder, template, args, ext, prefix, capitalize)
 
       if (args.controller) {
-        fs.createFile('controllers', 'controller', args, 'js', 'Controller')
+        fs.createFile('controllers', 'controller', args, '.js', 'Controller')
       }
 
       if (args.model) {
-        fs.createFile('models', 'model', args, 'js', '')
+        fs.createFile('models', 'model', args, '.js', '')
       }
 
       if (args.route) {
-        fs.createFile('routes', 'route', args, 'js', 'Router')
+        fs.createFile('routes', 'route', args, '.js', 'Router')
       }
     }
   } catch (error) {
